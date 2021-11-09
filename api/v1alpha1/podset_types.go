@@ -30,15 +30,13 @@ type PodSetSpec struct {
 
 	// Replicas is desired number of pods for podSet
 	// +kubebuilder:validation:Minimum=1
-	// +kubebuilder:validation:Minimum=10
+	// +kubebuilder:validation:Maximum=12
 	Replicas int32 `json:"replicas,omitempty"`
 }
 
 // PodSetStatus defines the observed state of PodSet
 type PodSetStatus struct {
-	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
-	// Names of the pods
+	// Names of the pods byte of strings
 	PodNames []string  `json:"podNames"`
 	// Current state of available replica pods 
 	AvailableReplicas int32 `json:"availableReplicas"`
@@ -48,8 +46,8 @@ type PodSetStatus struct {
 //+kubebuilder:subresource:status
 
 // PodSet is the Schema for the podsets API
-// +kubebuilder:printcolumn:JSONPATH=".spec.replicas",name=DesiredReplicas,type=string
-// +kubebuilder:printcolumn:JSONPATH=".spec.availableReplicas",name=AvailableReplicas,type=string
+// +kubebuilder:printcolumn:JSONPath=".spec.replicas",name=Desired,type=string
+// +kubebuilder:printcolumn:JSONPath=".status.availableReplicas",name=Available,type=string
 type PodSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -59,7 +57,6 @@ type PodSet struct {
 }
 
 //+kubebuilder:object:root=true
-
 // PodSetList contains a list of PodSet
 type PodSetList struct {
 	metav1.TypeMeta `json:",inline"`
