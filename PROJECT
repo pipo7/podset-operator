@@ -1,0 +1,6 @@
+domain: example.com
+layout:
+- go.kubebuilder.io/v3
+projectName: podset-operator
+repo: github.com/pipo7/podset-operator
+version: "3"
