@@ -25,8 +25,8 @@ import (
     ctrllog "sigs.k8s.io/controller-runtime/pkg/log"
 	//Changed path below from :
     // appv1alpha1 "github.com/redhat/podset-operator/api/v1alpha1"
-	// to :
-	appv1alpha1 "github.com/pipo7/podset-operator"
+	// to :  local path reference
+	appv1alpha1 "podset-operator/api/v1alpha1"
     corev1 "k8s.io/api/core/v1"
     metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
