@@ -1,4 +1,4 @@
-# podset-operator - Follow below instructions
+# podset-operator - Follow below instructions ***Error in controller.go to be corrected later
 The software versions might change so upgrade system and corresponding versions .
 Pre-requisites are:
 -------------------
