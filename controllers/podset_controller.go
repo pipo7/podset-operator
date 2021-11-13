@@ -47,7 +47,7 @@ type PodSetReconciler struct {
 // +kubebuilder:rbac:groups=app.example.com,resources=podsets,verbs=get;list;watch;create;update;patch;delete
 // +kubebuilder:rbac:groups=app.example.com,resources=podsets/status,verbs=get;update;patch
 // +kubebuilder:rbac:groups=v1,resources=pods,verbs=get;list;watch;create;update;patch;delete
-func (r *PodSetReconciler) Reconcile(context.Context, reconcile.Request) (reconcile.Result, error){
+func (r *PodSetReconciler) Reconcile(context.Context, req reconcile.Request) (reconcile.Result, error) {
 	_ = context.Background()
 	_ = r.Log.WithValues("podset", req.NamespacedName)
 
