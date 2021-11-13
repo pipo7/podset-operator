@@ -26,17 +26,17 @@ import (
 // PodSetSpec defines the desired state of PodSet
 type PodSetSpec struct {
 	// Replicas is the desired number of pods for the PodSet
-        // +kubebuilder:validation:Minimum=1
-        // +kubebuilder:validation:Maximum=12
-    Replicas int32 `json:"replicas,omitempty"`
+	// +kubebuilder:validation:Minimum=1
+	// +kubebuilder:validation:Maximum=12
+	Replicas int32 `json:"replicas,omitempty"`
 }
 
 // PodSetStatus defines the current status of PodSet and we want PodNames also so we add that
 type PodSetStatus struct {
 	//Names of the pods
-	PodNames        []string        `json:"podNames"`
+	PodNames []string `json:"podNames"`
 	// current state available replicas of pods
-    AvailableReplicas    int32    `json:"availableReplicas"`
+	AvailableReplicas int32 `json:"availableReplicas"`
 }
 
 //+kubebuilder:object:root=true

@@ -21,14 +21,20 @@ rules:
 - apiGroups:
   - app.example.com
   resources:
-  - podsets/finalizers
-  verbs:
-  - update
-- apiGroups:
-  - app.example.com
-  resources:
   - podsets/status
   verbs:
   - get
   - patch
   - update
+- apiGroups:
+  - v1
+  resources:
+  - pods
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
