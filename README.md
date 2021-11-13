@@ -1,4 +1,5 @@
-# podset-operator
+# podset-operator - Follow below instructions
+The software versions might change so upgrade system and corresponding versions .
 Pre-requisites are:
 -------------------
 git
@@ -9,8 +10,7 @@ docker version 17.03+.
 kubectl and access to a Kubernetes cluster of a compatible version.
 See :https://sdk.operatorframework.io/docs/building-operators/golang/installation/
 
-in above katacode example - 
-======================
+Versions:
 go version is 1.15.2
 on CentOS8 
 operator-sdk version: "v1.0.1", commit: "4169b318b578156ed56530f373d328276d040a1b", kubernetes version: "v1.18.2", go version: "go1.13.15 linux/amd64", GOOS: "linux", GOARCH: "amd64"
@@ -18,7 +18,7 @@ kubectl version 1.18+
 
 Ensure that your GOPROXY is set to "https://proxy.golang.org|direct"
 
-# Ensure make in installed 
+#Ensure make is installed 
 $ sudo apt-get update -y && sudo apt-get install -y make
 
 Below replace o with kubectl as we are using kubernetes and not Openshift
@@ -60,7 +60,7 @@ cat api/v1alpha1/podset_types.go
 More information on markers for config/code generation can be found here.
 
 #Let's now modify the PodSetSpec and PodSetStatus of the PodSet Custom Resource (CR) at api/v1alpha1/podset_types.go
-# It should look like the file below:
+#It should look like the file below:
 
 package v1alpha1
 import (
@@ -112,7 +112,7 @@ func init() {
 $ \cp /tmp/podset_types.go api/v1alpha1/podset_types.go  # this step works in katacoda excercise.
 
 #After modifying the *_types.go file, always run the following command to update the zz_generated.deepcopy.go file:
-# go to main podset folder and then run :
+#go to main podset folder and then run :
 $ make generate
 
 #Now we can run the make manifests command to generate our customized CRD and additional object YAMLs.
@@ -123,16 +123,16 @@ $ cat config/crd/bases/app.example.com_podsets.yaml
 
 #Deploy your PodSet Custom Resource Definition to the live OpenShift Cluster:
 $ oc apply -f config/crd/bases/app.example.com_podsets.yaml
-## OR you can also run make install , whcih will aslo do same "kustomize build config/crd | kubectl apply -f -"
+##OR you can also run make install , whcih will aslo do same "kustomize build config/crd | kubectl apply -f -"
 make install
 
 #Confirm the CRD was successfully created:
 $ oc get crd podsets.app.example.com -o yaml
 $ kubectl get crds podsets.app.example.com -o yaml
 
-## kubectl get crds podsets.app.example.com
-## NAME                      CREATED AT
-## podsets.app.example.com   2021-11-09T08:05:21Z
+#kubectl get crds podsets.app.example.com
+NAME                      CREATED AT
+podsets.app.example.com   2021-11-09T08:05:21Z
 
 
 #Let's now observe the default controllers/podset_controller.go file:
@@ -309,7 +309,7 @@ func (r *PodSetReconciler) SetupWithManager(mgr ctrl.Manager) error {
 $ \cp /tmp/podset_controller.go controllers/podset_controller.go
 
 
-## go mod tidy ensures that the go.mod file matches the source code in the module. It adds any missing module requirements necessary to build the current module's packages and dependencies, and it removes requirements on modules that don't provide any relevant packages. It also adds any missing entries to go.sum and removes unnecessary entries.
+##go mod tidy ensures that the go.mod file matches the source code in the module. It adds any missing module requirements necessary to build the current module's packages and dependencies, and it removes requirements on modules that don't provide any relevant packages. It also adds any missing entries to go.sum and removes unnecessary entries.
 go mod tidy
 
 #Once the CRD is registered, there are two ways to run the Operator:
@@ -318,19 +318,19 @@ go mod tidy
 #For the sake of this tutorial, we will run the Operator as a Go program outside the cluster using Operator-SDK and our kubeconfig credentials
 
 $ WATCH_NAMESPACE=myproject make run 
-# OR
+#OR
 $ make run &
-## if you get any go library depdency then please add that...
+##if you get any go library depdency then please add that...
 If you get ERROR " the package is not in /usr/local/go/src/..." then copy the package there . However this error should not come please check go module paths and settting in ~/profile
-# ~/go/src$ ls
-# podset-operator
-# $ cp -r podset-operator/ /usr/local/go/src/
+#~/go/src$ ls
+#podset-operator
+#$ cp -r podset-operator/ /usr/local/go/src/
 
 
 I got errors for 
 go get k8s.io/api/core/v1@v0.17.2
 
-# Creating the new CR now nased on CRD
+#Creating the new CR now nased on CRD
 #In a new terminal, inspect the Custom Resource manifest:
 
 $ cd $HOME/projects/podset-operator
